@@ -5,23 +5,25 @@ import { galleryItems } from './gallery-items.js';
 
 const galleryRef = document.querySelector('div.gallery');
 
-const galleryWrapper = [];
-const makeGalleryItem = galleryItems.map(item => {
-    const galleryLink = document.createElement('a');
-    galleryLink.setAttribute('class', 'gallery__link');
-    galleryLink.setAttribute('href', `${item.original}`);
+const makeGalleryItem = items => {
+    return items.map(item => {
+        const galleryLink = document.createElement('a');
+        galleryLink.setAttribute('class', 'gallery__link');
+        galleryLink.setAttribute('href', `${item.original}`);
 
-    const galleryImg = document.createElement('img');
-    galleryImg.setAttribute('class', 'gallery__image');
-    galleryImg.setAttribute('src', `${item.preview}`);
-    galleryImg.setAttribute('data-source', `${item.original}`);
-    galleryImg.setAttribute('alt', `${item.description}`);
+        const galleryImg = document.createElement('img');
+        galleryImg.setAttribute('class', 'gallery__image');
+        galleryImg.setAttribute('src', `${item.preview}`);
+        galleryImg.setAttribute('data-source', `${item.original}`);
+        galleryImg.setAttribute('alt', `${item.description}`);
 
-    galleryLink.append(galleryImg);
+        galleryLink.append(galleryImg);
 
-    return galleryWrapper.push(galleryLink);
-});
+        return galleryLink;
+    });
+};
 
+const galleryWrapper = makeGalleryItem(galleryItems);
 galleryRef.append(...galleryWrapper);
 
 const lightbox = document.querySelector('body');
